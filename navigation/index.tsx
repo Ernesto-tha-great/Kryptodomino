@@ -1,17 +1,16 @@
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, Entypo, Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
-
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import ChartScreen from '../screens/ChartScreen';
+import EbookScreen from '../screens/EbookScreen';
+import FavouriteScreen from '../screens/FavouriteScreen';
+import HomeScreen from '../screens/HomeScreen';
+import SettingScreen from '../screens/SettingScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 
-export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+export default function Navigation() {
   return (
     <NavigationContainer>
       <RootNavigator />
@@ -36,40 +35,53 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarActiveTintColor: 'tomato',
+        headerShown: false,
       }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        name="Home"
+        component={HomeScreen}
+        options={({ navigation }: RootTabScreenProps<'Home'>) => ({
+          title: 'Home',
+          tabBarIcon: ({ color }) => <Entypo name="home"  size={24} color='gray' />,
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="Charts"
+        component={ChartScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Charts',
+          tabBarIcon: ({ color }) => <FontAwesome name="line-chart" size={24} color='gray' />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Favourite"
+        component={FavouriteScreen}
+        options={{
+          title: 'Favourites',
+          tabBarIcon: ({ color }) => <FontAwesome name="heart" size={24} color='gray' />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Ebooks"
+        component={EbookScreen}
+        options={{
+          title: 'Ebooks',
+          tabBarIcon: ({ color }) => <Ionicons name="newspaper-outline" size={24} color='gray' />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Settings"
+        component={SettingScreen}
+        options={{
+          title: 'Charts',
+          tabBarIcon: ({ color }) => <Ionicons name="settings-sharp" size={24} color='gray' />,
         }}
       />
     </BottomTab.Navigator>
   );
-}
-
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }
