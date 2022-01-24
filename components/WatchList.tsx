@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { View, Text, TouchableOpacity, FlatList} from 'react-native';
+import { View, Text, TouchableOpacity, FlatList,ScrollView} from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 import MiniWatchListCard from './MiniWatchListCard';
 import { DummyData1 } from '../constants/DummyData';
@@ -23,12 +23,17 @@ const WatchList = () => {
     ) : (
         <View style={tw`mt-4 mx-4`}>
             <Text style={tw`text-2xl font-medium`}>Watchlist</Text>
-            <View style={tw`shadow-lg bg-white py-3 px-4 rounded-xl`}>
-                <FlatList
+            <View style={tw`shadow-lg bg-white py-4 px-4 rounded-2xl mt-2`}>
+                {/* <FlatList
                     data={DummyData1}
                     renderItem={({item}) => <MiniWatchListCard item={item} />}
                     keyExtractor={item => item.id}
-                />
+                /> */}
+                <ScrollView>
+                  {DummyData1.map((item, index) => (
+                    <MiniWatchListCard key={index * item.id} item={item} />
+                  ))}
+                </ScrollView>
             </View>
         </View>
     )}

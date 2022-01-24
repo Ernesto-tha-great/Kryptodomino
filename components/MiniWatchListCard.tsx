@@ -18,7 +18,7 @@ const MiniWatchListCard = ({item}: Props) => {
       </View>
       <View style={tw`items-center`}>
         <Text style={tw`text-xl`}>${item.price}</Text>
-        <Text style={[tw`text-xl`, {color: item.change > 0 ? "green" : "red"}]}>{item.change}</Text>
+        <Text style={[tw`text-xl`, {color: item.change > 0 ? "green" : "red"}]}>{item.change}%</Text>
       </View>
     </View>
   );
