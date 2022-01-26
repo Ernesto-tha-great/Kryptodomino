@@ -4,7 +4,11 @@ import tw from 'tailwind-react-native-classnames';
 import MiniWatchListCard from './MiniWatchListCard';
 import { DummyData1 } from '../constants/DummyData';
 
-const WatchList = () => {
+interface Props {
+  favourites? : boolean;
+}
+
+const WatchList = ({favourites}: Props) => {
     const [emptyState, setEmptyState] = useState(false);
   return (
       <>
@@ -22,13 +26,8 @@ const WatchList = () => {
     </View>
     ) : (
         <View style={tw`mt-4 mx-4`}>
-            <Text style={tw`text-2xl font-medium`}>Watchlist</Text>
+           {!favourites && <Text style={tw`text-2xl font-medium`}>Watchlist</Text> }
             <View style={tw`shadow-lg bg-white py-4 px-4 rounded-2xl mt-2`}>
-                {/* <FlatList
-                    data={DummyData1}
-                    renderItem={({item}) => <MiniWatchListCard item={item} />}
-                    keyExtractor={item => item.id}
-                /> */}
                 <ScrollView>
                   {DummyData1.map((item, index) => (
                     <MiniWatchListCard key={index * item.id} item={item} />

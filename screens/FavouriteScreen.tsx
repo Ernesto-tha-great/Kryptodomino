@@ -1,11 +1,15 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, SafeAreaView } from 'react-native'
+import Header from '../components/Header'
+import WatchList from '../components/WatchList'
 
-const FavouriteScreen = () => {
+const FavouriteScreen = ({navigation}: any) => {
     return (
-        <View>
-            <Text>Favourites</Text>
-        </View>
+        <SafeAreaView>
+          <Header title='Favourites(s)' navigation={navigation} />
+            <WatchList favourites={true} />
+            
+        </SafeAreaView>
     )
 }
 
